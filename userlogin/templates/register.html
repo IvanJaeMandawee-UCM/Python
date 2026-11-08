@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+  <form class="w3-mobile w3-card-4 w3-container w3-padding" style="width:40%;margin:auto;" action="{{ url_for('register') }}" method="POST" id="register-form">
+    <h3 style="margin:8px 0 0 0;">CREATE ACCOUNT</h3>
+    <p>
+      <label><b>FULL NAME</b></label>
+      <input type="text" name="name" id="name" value="{{ name }}" class="w3-input w3-border" required>
+    </p>
+    <p>
+      <label><b>E-MAIL</b></label>
+      <input type="email" name="email" id="email" value="{{ email }}" class="w3-input w3-border" required>
+    </p>
+    <p>
+      <label><b>PASSWORD</b></label>
+      <input type="password" name="password" id="password" class="w3-input w3-border" required>
+    </p>
+    <p>
+      <label><b>CONFIRM PASSWORD</b></label>
+      <input type="password" name="confirm" id="confirm" class="w3-input w3-border" required>
+    </p>
+    <p class="w3-right">
+      <input type="submit" value="REGISTER" id="register-btn" class="w3-button w3-blue">
+    </p>
+    <p style="clear:both;text-align:center;">Already registered? <a href="{{ url_for('index') }}" id="login-link">Back to login</a></p>
+  </form>
+{% endblock %}

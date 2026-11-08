@@ -1,0 +1,72 @@
+{
+ "label": "sanity-v1.1",
+ "run_at": "2026-11-08 16:34:32",
+ "results": [
+  {
+   "id": "SM-01",
+   "type": "Smoke",
+   "title": "Application starts and home page loads",
+   "procedure": "Open http://127.0.0.1:5057/ in the browser.",
+   "expected": "HTTP 200, page title 'USER LOGIN', login form (e-mail, password, LOGIN) visible.",
+   "actual": "HTTP 200; title 'USER LOGIN'; header shows 'USER LOGIN v1.1'; login form visible: True.",
+   "status": "PASS",
+   "shot": "SM-01.png",
+   "seconds": 0.18
+  },
+  {
+   "id": "SM-04",
+   "type": "Smoke",
+   "title": "Critical path: seeded user can log in",
+   "procedure": "Enter alpha@uc.com / hello123 on the login page and press LOGIN.",
+   "expected": "User is taken to /main and the students table is shown.",
+   "actual": "Landed on http://127.0.0.1:5057/main; students table visible: True.",
+   "status": "PASS",
+   "shot": "SM-04.png",
+   "seconds": 0.51
+  },
+  {
+   "id": "FT-01",
+   "type": "Functional",
+   "title": "Register with valid details",
+   "procedure": "Open /register; enter Name 'Juan Dela Cruz', E-mail juan@uc.com, Password Passw0rd! (twice); press REGISTER.",
+   "expected": "Redirected to login page with a green 'Registration successful' message; one new row saved in the users table.",
+   "actual": "Now on http://127.0.0.1:5057/; message: 'Registration successful. You can now log in.'; rows in users for juan@uc.com: 1.",
+   "status": "PASS",
+   "shot": "FT-01.png",
+   "seconds": 0.41
+  },
+  {
+   "id": "FT-02",
+   "type": "Functional",
+   "title": "Login with a newly registered account",
+   "procedure": "Register ana@uc.com, then log in with ana@uc.com / Passw0rd!.",
+   "expected": "Redirected to /main; header shows 'Welcome, Ana Reyes'.",
+   "actual": "URL http://127.0.0.1:5057/main; header text: 'Welcome, Ana Reyes'.",
+   "status": "PASS",
+   "shot": "FT-02.png",
+   "seconds": 0.47
+  },
+  {
+   "id": "FT-08",
+   "type": "Functional",
+   "title": "Logout",
+   "procedure": "Log in as alpha@uc.com, then click LOG-OUT.",
+   "expected": "Redirected to the login page with 'You have been logged out.'; /main is no longer accessible.",
+   "actual": "After logout URL http://127.0.0.1:5057/; message 'You have been logged out.'; /main now redirects to login: True.",
+   "status": "PASS",
+   "shot": "FT-08.png",
+   "seconds": 0.52
+  },
+  {
+   "id": "EX-02",
+   "type": "Exploratory",
+   "title": "Log in using different letter case than at registration",
+   "procedure": "Register Mixed@Case.com, then log in with mixed@case.com.",
+   "expected": "Login succeeds.",
+   "actual": "URL after login: http://127.0.0.1:5057/main; message: ''.",
+   "status": "PASS",
+   "shot": "EX-02.png",
+   "seconds": 0.45
+  }
+ ]
+}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block logout %}
+  <a href="{{ url_for('logout') }}" id="logout-btn" class="w3-bar-item w3-right w3-btn">LOG-OUT</a>
+  <span class="w3-bar-item w3-right" id="welcome">Welcome, {{ session['name'] }}</span>
+{% endblock %}
+{% block content %}
+  <div style="overflow-x:auto;">
+    <table class="w3-table-all w3-card-4" id="students-table">
+      <tr>
+        <th>ID</th><th>IDNO</th><th>LASTNAME</th><th>FIRSTNAME</th><th>COURSE</th><th>LEVEL</th>
+      </tr>
+      {% for s in students %}
+      <tr>
+        <td>{{ s['id'] }}</td><td>{{ s['idno'] }}</td><td>{{ s['lastname'] }}</td>
+        <td>{{ s['firstname'] }}</td><td>{{ s['course'] }}</td><td>{{ s['level'] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+{% endblock %}

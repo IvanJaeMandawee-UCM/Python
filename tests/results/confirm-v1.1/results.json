@@ -1,0 +1,83 @@
+{
+ "label": "confirm-v1.1",
+ "run_at": "2026-11-08 16:34:38",
+ "results": [
+  {
+   "id": "EX-01",
+   "type": "Exploratory",
+   "title": "Same e-mail typed with different letter case",
+   "procedure": "Register Case@Test.com, then try to register case@test.com.",
+   "expected": "Second registration refused (e-mail addresses are not case-sensitive).",
+   "actual": "Message: 'That e-mail is already registered.'; accounts now stored for this address: 1.",
+   "status": "PASS",
+   "shot": "EX-01.png",
+   "seconds": 0.41
+  },
+  {
+   "id": "EX-02",
+   "type": "Exploratory",
+   "title": "Log in using different letter case than at registration",
+   "procedure": "Register Mixed@Case.com, then log in with mixed@case.com.",
+   "expected": "Login succeeds.",
+   "actual": "URL after login: http://127.0.0.1:5057/main; message: ''.",
+   "status": "PASS",
+   "shot": "EX-02.png",
+   "seconds": 0.54
+  },
+  {
+   "id": "EX-03",
+   "type": "Exploratory",
+   "title": "Name made only of spaces",
+   "procedure": "Register with Name '   ' (three spaces), valid e-mail and password.",
+   "expected": "Registration refused (a name is required).",
+   "actual": "Rows saved with a blank name: 0.",
+   "status": "PASS",
+   "shot": "EX-03.png",
+   "seconds": 0.1
+  },
+  {
+   "id": "EX-04",
+   "type": "Exploratory",
+   "title": "Very short password",
+   "procedure": "Register with the one-character password 'a' (and confirmation 'a').",
+   "expected": "Registration refused with a message about minimum password length.",
+   "actual": "Message: 'Password must be at least 8 characters long.'; rows saved with a 1-character password: 0.",
+   "status": "PASS",
+   "shot": "EX-04.png",
+   "seconds": 0.31
+  },
+  {
+   "id": "EX-05",
+   "type": "Exploratory",
+   "title": "E-mail typed with extra spaces",
+   "procedure": "Send a registration with e-mail '  space@test.com  ' (spaces before and after).",
+   "expected": "Spaces are removed before saving (stored e-mail is 'space@test.com').",
+   "actual": "Stored e-mail value: 'space@test.com'.",
+   "status": "PASS",
+   "shot": "EX-05.png",
+   "seconds": 0.2
+  },
+  {
+   "id": "EX-06",
+   "type": "Exploratory",
+   "title": "Logged-in user opens the login/register pages",
+   "procedure": "Log in, then type / (and /register) in the address bar.",
+   "expected": "User is sent straight to /main instead of seeing the login form again.",
+   "actual": "Opening '/' ended at http://127.0.0.1:5057/main; opening '/register' ended at http://127.0.0.1:5057/main.",
+   "status": "PASS",
+   "shot": "EX-06.png",
+   "seconds": 0.42
+  },
+  {
+   "id": "EX-07",
+   "type": "Exploratory",
+   "title": "Extremely long name (200 characters)",
+   "procedure": "Register with a 200-character name.",
+   "expected": "Refused with a message (database column allows 50 characters).",
+   "actual": "Message: 'Name and e-mail must be 50 characters or less.'; rows saved: 0; longest stored name length: None.",
+   "status": "PASS",
+   "shot": "EX-07.png",
+   "seconds": 0.28
+  }
+ ]
+}
